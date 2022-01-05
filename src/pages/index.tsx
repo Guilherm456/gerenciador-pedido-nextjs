@@ -343,13 +343,9 @@ export default function Home({ products }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const docUser = await getDocs(collection(db, 'products'));
-  // const products = docUser.docs.map((doc: DocumentData) => doc.data());
-  const products = [
-    { name: 'P', price: 13 },
-    { name: 'M', price: 15 },
-    { name: 'G', price: 18 },
-  ];
+  const docUser = await getDocs(collection(db, 'products'));
+  const products = docUser.docs.map((doc: DocumentData) => doc.data());
+
   return {
     props: { products },
     revalidate: 60 * 60 * 24,
